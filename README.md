@@ -29,7 +29,7 @@ test/stderr.csv
 
 Note that this is the same as running it locally with,
 ```bash
-cat test/stdin.csv | \
+cat test/stdin_local.csv | \
     python3 main.py \
 test/stdout.csv \
 test/stderr.csv
