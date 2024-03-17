@@ -6,7 +6,7 @@ To build the container
 docker build -t <CONTAINER_NAME> .
 ```
 
-To run the container
+To run the container,
 ```bash
 cat test/stdin.csv |
 docker run --init \
@@ -23,6 +23,15 @@ docker run --init \
         --mount type=tmpfs,destination=/tmp,tmpfs-size=5368709120,tmpfs-mode=1777 \
         --interactive \
         <CONTAINER_NAME> \
+test/stdout.csv \
+test/stderr.csv
+```
+
+Note that this is the same as running it locally with,
+
+```bash
+cat test/stdin.csv | \
+    python3 main.py \
 test/stdout.csv \
 test/stderr.csv
 ```
