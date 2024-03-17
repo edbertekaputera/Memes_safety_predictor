@@ -6,6 +6,7 @@ venv/
 sample_submission/
 utils/
 test/
+clip-vit-base-patch32/
 
 # Ignore Misc
 LICENSE

@@ -28,10 +28,21 @@ test/stderr.csv
 ```
 
 Note that this is the same as running it locally with,
-
 ```bash
 cat test/stdin.csv | \
     python3 main.py \
 test/stdout.csv \
 test/stderr.csv
+```
+
+But, you would need the `openai/clip-vit-base-patch32` weights to be installed locally on the directory.
+To do this, simply `clone it` as followed,
+```bash
+git lfs install
+
+# Use HTTPS
+git clone https://huggingface.co/openai/clip-vit-base-patch32
+
+# Use SSH
+git clone git@hf.co:openai/clip-vit-base-patch32
 ```
