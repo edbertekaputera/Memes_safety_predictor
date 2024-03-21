@@ -12,16 +12,18 @@ from googletrans import Translator
 
 if __name__ == "__main__":
 
-    img_path = "../test/images/8b52fi.png"
+    img_path = "../test/images/zhongguo.jpg"
     image = Image.open(img_path)
 
 
     #transform iamge
-    preprocessor = ppImg.PreprocessImage(metrics=['grayscale','remove_noise','erode'])
+    preprocessor = ppImg.PreprocessImage(metrics=['grayscale','remove_noise'])
     image_np = preprocessor.transform_image(image)
 
     #extract text
     converted_image = Image.fromarray(image_np)
+    converted_image.show()
+
     text = pytesseract.image_to_string(converted_image, lang='chi_sim')
     
     # Print the extracted text
