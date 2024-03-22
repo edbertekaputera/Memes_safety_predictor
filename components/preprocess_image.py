@@ -6,7 +6,7 @@ import cv2
 
 """Class to process images so that text retrieval is easier"""
 class PreprocessImage:
-    def __init__(self, metrics=['grayscale','remove_noise','thresholding','dilate','erode','opening']):
+    def __init__(self, metrics=['grayscale','remove_noise','thresholding','dilate','erode','opening','bilateral']):
         self.metrics = metrics
     
     def get_grayscale(self, image):
@@ -16,7 +16,8 @@ class PreprocessImage:
         return cv2.medianBlur(image,3)
     
     def thresholding(self, image):
-        return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)[1]
+        # return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY)[1]
+        return cv2.threshold(image, 200, 255, 1)[1]
    
     def dilate(self, image):
         kernel = np.ones((3,3),np.uint8)
@@ -29,6 +30,9 @@ class PreprocessImage:
     def opening(self, image):
         kernel = np.ones((3,3),np.uint8)
         return cv2.morphologyEx(image, cv2.MORPH_OPEN, kernel)
+    
+    def bilateral(self, image):
+        return cv2.bilateralFilter(image,5,55,60)
     
     
 
@@ -50,5 +54,7 @@ class PreprocessImage:
                 image_np = self.erode(image_np)
             elif metric == 'opening':
                 image_np = self.opening(image_np)
+            elif metric == 'bilateral':
+                image_np = self.bilateral(image_np)
 
         return image_np
