@@ -7,37 +7,39 @@ def extractText(img_path):
     #extract image
     image = Image.open(img_path)
 
-    #transform iamge
+    #create preprocess instances
     preprocessorBasic = ppImg.PreprocessImage(metrics=['grayscale','bilateral','thresholding'])
-    image_np = preprocessorBasic.transform_image(image)
-
     preprocessorEng = ppImg.PreprocessImage(metrics=['grayscale','remove_noise','thresholding'])
-    image_npEng = preprocessorEng.transform_image(image)
-
     preprocessorChi = ppImg.PreprocessImage(metrics=['grayscale','remove_noise'])
-    image_npChi = preprocessorChi.transform_image(image)
-
     preprocessorTan = ppImg.PreprocessImage(metrics=['grayscale','thresholding'])
-    image_npTam = preprocessorTan.transform_image(image)
-
-    #extract text
-    converted_image = Image.fromarray(image_np)
-    converted_imageEng = Image.fromarray(image_npEng)
-    converted_imageChi = Image.fromarray(image_npChi)
-    converted_imageTam = Image.fromarray(image_npTam)
 
     #detect language
+    image_np = preprocessorBasic.transform_image(image)
+    converted_image = Image.fromarray(image_np)
     script_name, _ = trnsImg.detect_language(img_path)
-
 
     #select language
     if script_name == "Han":
+        image_npChi = preprocessorChi.transform_image(image)
+        converted_imageChi = Image.fromarray(image_npChi)
+
         text = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
         lang = "chi_sim"
     elif script_name == "Tamil":
+        image_npTam = preprocessorTan.transform_image(image)
+        converted_imageTam = Image.fromarray(image_npTam)
+
         text = pytesseract.image_to_string(converted_imageTam, lang='tam')
         lang = "Tam"
     elif script_name == "Arabic":
+        image_npEng = preprocessorEng.transform_image(image)
+        image_npChi = preprocessorChi.transform_image(image)
+        image_npTam = preprocessorTan.transform_image(image)
+
+        converted_imageEng = Image.fromarray(image_npEng)
+        converted_imageChi = Image.fromarray(image_npChi)
+        converted_imageTam = Image.fromarray(image_npTam)
+
         text1 = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
         text2 = pytesseract.image_to_string(converted_imageTam, lang='tam')
         text3 = pytesseract.image_to_string(converted_image, lang='eng')
@@ -56,6 +58,9 @@ def extractText(img_path):
                 text = text3
                 lang = "eng"
     else:
+        image_npEng = preprocessorEng.transform_image(image)
+        converted_imageEng = Image.fromarray(image_npEng)
+
         text = pytesseract.image_to_string(converted_imageEng, lang='eng')
         lang = "eng"
     

@@ -7,7 +7,6 @@ import cv2 as cv
 
 import os
 
-pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract'
 
 def load_images(directory):
     img_paths_list = []
@@ -16,13 +15,6 @@ def load_images(directory):
         file_path = os.path.join(directory, file_name)
         img_paths_list.append(file_path)
     return img_paths_list
-
-def convert_text(text):
-
-    translator = Translator()
-    translate_text = translator.translate(text) 
-
-    return translate_text
 
 
 def detect_language(img_path):
