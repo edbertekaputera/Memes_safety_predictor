@@ -17,7 +17,7 @@ class PreprocessImage:
     
     def thresholding(self, image):
         # return cv2.threshold(image, 0, 255, cv2.THRESH_BINARY)[1]
-        return cv2.threshold(image, 200, 255, 1)[1]
+        return cv2.threshold(image, 170, 255, 1)[1]
    
     def dilate(self, image):
         kernel = np.ones((3,3),np.uint8)

@@ -14,21 +14,31 @@ import easyocr
 
 if __name__ == "__main__":
 
-    img_path = '../test/images/tamilmeme.png'
+    img_path = '../test/images/racist.png'
     image = Image.open(img_path)
 
-    #transform iamge
+    # #transform iamge
     preprocessorBasic = ppImg.PreprocessImage(metrics=['grayscale','bilateral','thresholding'])
     image_np = preprocessorBasic.transform_image(image)
 
+    preprocessorEng = ppImg.PreprocessImage(metrics=['grayscale','remove_noise','thresholding'])
+    image_npEng = preprocessorEng.transform_image(image)
+
     preprocessorChi = ppImg.PreprocessImage(metrics=['grayscale','remove_noise'])
-    image_npChiTam = preprocessorChi.transform_image(image)
+    image_npChi = preprocessorChi.transform_image(image)
+
+    preprocessorTan = ppImg.PreprocessImage(metrics=['grayscale','thresholding'])
+    image_npTam = preprocessorTan.transform_image(image)
 
     #extract text
     converted_image = Image.fromarray(image_np)
     converted_image.show()
-    converted_imageChiTam = Image.fromarray(image_npChiTam)
-    converted_imageChiTam.show()
+    converted_imageEng = Image.fromarray(image_npEng)
+    converted_imageEng.show()
+    converted_imageChi = Image.fromarray(image_npChi)
+    converted_imageChi.show()
+    converted_imageTam = Image.fromarray(image_npTam)
+    converted_imageTam.show()
 
     #detect language
     script_name, _ = trnsImg.detect_language(img_path)
@@ -36,29 +46,29 @@ if __name__ == "__main__":
     print(script_name)
 
     if script_name == "Han":
-        text = pytesseract.image_to_string(converted_imageChiTam, lang='chi_sim')
+        text = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
     elif script_name == "Tamil":
-        text = pytesseract.image_to_string(converted_imageChiTam, lang='tam')
+        text = pytesseract.image_to_string(converted_imageTam, lang='tam')
     elif script_name == "Arabic":
-        text1 = pytesseract.image_to_string(converted_imageChiTam, lang='chi_sim')
-        text2 = pytesseract.image_to_string(converted_imageChiTam, lang='tam')
-        text3 = pytesseract.image_to_string(converted_image)
+        text1 = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
+        text2 = pytesseract.image_to_string(converted_imageTam, lang='tam')
+        text3 = pytesseract.image_to_string(converted_image, lang='eng')
         if len(text1) < len(text2)/1.5:
             print("Tamil")
-            if len(text3) < len(text2):
+            if len(text3) < 3*len(text2):
                 text = text2
-                
             else:
+                print('eng')
                 text = text3
         else:
             print("CHI")
             if len(text3) < len(text1):
                 text = text1
-                
             else:
+                print('eng')
                 text = text3
     else:
-        text = pytesseract.image_to_string(converted_image)
+        text = pytesseract.image_to_string(converted_imageEng, lang='eng')
     
     # Print the extracted text
     print("Extracted Text:")
