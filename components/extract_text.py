@@ -1,23 +1,13 @@
 from PIL import Image
-import numpy as np
-import matplotlib.pyplot as plt
-import cv2
-from langdetect import detect
 import pytesseract
 import preprocess_image as ppImg
 import translate_image as trnsImg
 
-import easyocr
-
-
-# pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files/Tesseract-OCR/tesseract'
-
-if __name__ == "__main__":
-
-    img_path = '../test/images/racist.png'
+def extractText(img_path):
+    #extract image
     image = Image.open(img_path)
-
-    # #transform iamge
+    
+    #transform iamge
     preprocessorBasic = ppImg.PreprocessImage(metrics=['grayscale','bilateral','thresholding'])
     image_np = preprocessorBasic.transform_image(image)
 
@@ -43,8 +33,8 @@ if __name__ == "__main__":
     #detect language
     script_name, _ = trnsImg.detect_language(img_path)
 
-    print(script_name)
 
+    #select language
     if script_name == "Han":
         text = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
     elif script_name == "Tamil":
@@ -70,6 +60,4 @@ if __name__ == "__main__":
     else:
         text = pytesseract.image_to_string(converted_imageEng, lang='eng')
     
-    # Print the extracted text
-    print("Extracted Text:")
-    print(text)
+    return text
