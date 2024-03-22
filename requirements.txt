@@ -1,5 +1,10 @@
-transformers
+torch
+torchvision
 opencv-python
 numpy
-torch
+pytorch-lightning==1.9.3
 pillow
+ftfy
+regex
+tqdm
+clip @ git+https://github.com/openai/CLIP.git
