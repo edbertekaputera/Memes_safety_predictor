@@ -6,13 +6,17 @@ venv/
 sample_submission/
 utils/
 test/
-clip-vit-base-patch32/
+resources/
+
+# Old components folder
+components/
 
 # Ignore Misc
 LICENSE
 README.md
 .DS_Store
 .gitignore
+*/__pycache__/
 
 # Ignore files
 *.png
