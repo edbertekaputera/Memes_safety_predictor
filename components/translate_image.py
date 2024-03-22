@@ -1,10 +1,6 @@
-from PIL import Image
 import pytesseract
 import re
-from transformers import MarianMTModel, MarianTokenizer
-from googletrans import Translator
 import cv2 as cv
-
 import os
 
 
@@ -15,6 +11,10 @@ def load_images(directory):
         file_path = os.path.join(directory, file_name)
         img_paths_list.append(file_path)
     return img_paths_list
+
+def convert_text(text):
+
+    pass
 
 
 def detect_language(img_path):

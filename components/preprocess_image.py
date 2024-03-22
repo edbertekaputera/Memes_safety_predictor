@@ -1,7 +1,4 @@
-from PIL import Image
 import numpy as np
-import pytesseract
-import matplotlib.pyplot as plt
 import cv2
 
 """Class to process images so that text retrieval is easier"""
