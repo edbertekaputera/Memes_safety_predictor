@@ -1,7 +1,7 @@
 import fasttext
 from transformers import M2M100Tokenizer
 
-def identify_language(text:str, model_path:str="lid.176.bin") -> str:
+def identify_language(text:str, model) -> str:
     """
     Detect which langauge is the text
     Base model:
@@ -11,9 +11,12 @@ def identify_language(text:str, model_path:str="lid.176.bin") -> str:
     - zh : mandarin
     - ms : malay
     - id : bahasa
+    Example:
+    import fasttext
+    model = fasttext.load_model("lid.176.bin")
+    identify_language("ni hao", model)
     """
     try:
-        model = fasttext.load_model("lid.176.bin")
         predictions = model.predict(text)
         predicted_language = predictions[0][0].split("__label__")[1]
         return predicted_language
