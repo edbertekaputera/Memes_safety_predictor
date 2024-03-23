@@ -2,7 +2,8 @@
 import cv2
 import torch
 import sys
-from src import MemesLoader, HateClassifier
+from src.model import HateClassifier
+from src.preprocessing import MemesLoader
 
 # Classification function
 def classify_meme(image_path, model:HateClassifier, loader:MemesLoader, threshold=0.5):
@@ -19,7 +20,7 @@ def main():
 					   else "cpu")
 	
 	# Initialize predictors in ensemble
-	meme_loader = MemesLoader(device=device)
+	meme_loader = MemesLoader("./resources/pretrained_weights/clip/ViT-L-14.pt", device=device)
 	model = HateClassifier.load_from_checkpoint("./resources/pretrained_weights/hmc_text-inv-comb_best.ckpt", 
 											clip_weights_path="./resources/pretrained_weights/clip/ViT-L-14.pt",
 											text_inver_phi_weights_path="./resources/pretrained_weights/phi/phi_imagenet_45.pt",
@@ -33,6 +34,8 @@ def main():
 		# IMPORTANT: Please ensure any trailing whitespace (eg: \n) is removed. This may impact some modules to open the filepath
 		image_path = line.replace("\n", "")
 		image_path = image_path.rstrip()
+		if image_path == "":
+			pass
 		try:
 			# Process the image
 			proba, label = classify_meme(image_path, 
