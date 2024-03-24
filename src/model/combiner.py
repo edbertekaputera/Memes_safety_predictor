@@ -1,9 +1,6 @@
 import torch
 import torch.nn as nn
 
-# 		self.comb = Combiner(self.map_dim, self.comb_proj, self.comb_fusion)
-
-
 class Combiner(nn.Module):
 	def __init__(self, input_dim: int = 1024):
 		super(Combiner, self).__init__()

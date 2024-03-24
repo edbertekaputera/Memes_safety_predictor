@@ -13,8 +13,8 @@ docker run --init \
         --attach "stdin" \
         --attach "stdout" \
         --attach "stderr" \
-        --cpus 4 \
-        --memory 4g \
+        --cpus 8 \
+        --memory 6g \
         --memory-swap 0 \
         --ulimit nproc=1024 \
         --ulimit nofile=1024 \
@@ -35,14 +35,24 @@ test/stdout.csv \
 test/stderr.csv
 ```
 
-But, you would need the `openai/clip-vit-base-patch32` weights to be installed locally on the directory.
-To do this, simply `clone it` as followed,
+But, you would need the weights to be installed locally on the directory.
+To do this, simply run the `install_weights.sh` or run the code as followed,
 ```bash
-git lfs install
+# Download resources
+wget https://github.com/miccunifi/ISSUES/releases/download/latest/resources.zip
+unzip ./resources.zip
+rm resources.zip
 
-# Use HTTPS
-git clone https://huggingface.co/openai/clip-vit-base-patch32
+# remove unnecessary folders
+rm -r ./resources/datasets
+rmdir ./resources/pretrained_models
+rm -r ./resources/pretrained_weights/harmeme
 
-# Use SSH
-git clone git@hf.co:openai/clip-vit-base-patch32
+export PRETRAINED_WEIGHTS_DIR="./resources/pretrained_weights"
+
+# Install CLIP model weights
+wget -P "$PRETRAINED_WEIGHTS_DIR/clip/" https://openaipublic.azureedge.net/clip/models/b8cca3fd41ae0c99ba7e8951adf17d267cdb84cd88be6f7c2e0eca1737a03836/ViT-L-14.pt
+
+# Install ISSUES pretrained weights
+wget -P "$PRETRAINED_WEIGHTS_DIR" https://github.com/miccunifi/ISSUES/releases/download/latest/hmc_text-inv-comb_best.ckpt
 ```

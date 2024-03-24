@@ -7,30 +7,11 @@ import pytorch_lightning as pl
 
 # Local libraries
 from .combiner import Combiner
-from .textualInversion import TextualInversion
+from .textual_inversion import TextualInversion
+from .linear_projection import LinearProjection
 
 # Constants
 CLIP_IMG_ENC_OUTPUT_DIM_BEFORE_PROJ = 1024
-
-# Linear Projection Module
-class LinearProjection(nn.Module):
-    def __init__(self, input_dim, output_dim, num_layers, drop_probs):
-        super(LinearProjection, self).__init__()
-        # Define trainable projection layers
-        map_layers = [nn.Linear(input_dim, output_dim),
-                      nn.Dropout(p=drop_probs[0])]
-
-        for _ in range(1, num_layers):
-            map_layers.extend(
-                [nn.ReLU(), nn.Linear(output_dim, output_dim), nn.Dropout(p=drop_probs[0])])
-
-        self.proj = nn.Sequential(*map_layers)
-
-    def __call__(self, *args, **kwargs):
-        return super().__call__(*args, **kwargs)
-
-    def forward(self, x):
-        return self.proj(x)
     
 # Hateful Meme Classifier
 class HateClassifier(pl.LightningModule):

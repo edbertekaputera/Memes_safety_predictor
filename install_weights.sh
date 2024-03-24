@@ -17,4 +17,3 @@ wget -P "$PRETRAINED_WEIGHTS_DIR/clip/" https://openaipublic.azureedge.net/clip/
 
 # Install ISSUES pretrained weights
 wget -P "$PRETRAINED_WEIGHTS_DIR" https://github.com/miccunifi/ISSUES/releases/download/latest/hmc_text-inv-comb_best.ckpt
-# python -m pytorch_lightning.utilities.upgrade_checkpoint "$PRETRAINED_WEIGHTS_DIR/hmc_text-inv-comb_best.ckpt"

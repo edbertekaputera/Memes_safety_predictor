@@ -1,67 +1,73 @@
 from PIL import Image
 import pytesseract
-import preprocess_image as ppImg
-import translate_image as trnsImg
+from . import preprocess_image as ppImg
+from . import translate_image as trnsImg
+import numpy as np
 
-def extractText(img_path):
-    #extract image
-    image = Image.open(img_path)
+def extractText(image:Image):
+	#create preprocess instances
+	preprocessorBasic = ppImg.PreprocessImage(metrics=['grayscale'])
+	preprocessorEng = ppImg.PreprocessImage(metrics=['bilateral','thresholding230'])
+	preprocessorChi = ppImg.PreprocessImage(metrics=['remove_noise'])
+	preprocessorTan = ppImg.PreprocessImage(metrics=['thresholding170'])
 
-    #create preprocess instances
-    preprocessorBasic = ppImg.PreprocessImage(metrics=['grayscale','bilateral','thresholding'])
-    preprocessorEng = ppImg.PreprocessImage(metrics=['grayscale','remove_noise','thresholding'])
-    preprocessorChi = ppImg.PreprocessImage(metrics=['grayscale','remove_noise'])
-    preprocessorTan = ppImg.PreprocessImage(metrics=['grayscale','thresholding'])
+	#detect language
+	image_np = preprocessorBasic.transform_image(image)
+	converted_image = Image.fromarray(image_np)
+	script_name, _ = trnsImg.detect_language(converted_image)
 
-    #detect language
-    image_np = preprocessorBasic.transform_image(image)
-    converted_image = Image.fromarray(image_np)
-    script_name, _ = trnsImg.detect_language(img_path)
+	# Initialize default
+	text = "null"
+	lang = "null"
 
-    #select language
-    if script_name == "Han":
-        image_npChi = preprocessorChi.transform_image(image)
-        converted_imageChi = Image.fromarray(image_npChi)
+	#select language
+	if script_name in ["Han", "Hangul", "Katakana", "Japanese"]:
+		image_npChi = preprocessorChi.transform_image(converted_image)
+		converted_imageChi = Image.fromarray(image_npChi)
 
-        text = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
-        lang = "chi_sim"
-    elif script_name == "Tamil":
-        image_npTam = preprocessorTan.transform_image(image)
-        converted_imageTam = Image.fromarray(image_npTam)
+		text = pytesseract.image_to_string(converted_imageChi, lang='chi_sim', config="--psm 6")
+		lang = "chi_sim"
 
-        text = pytesseract.image_to_string(converted_imageTam, lang='tam')
-        lang = "Tam"
-    elif script_name == "Arabic":
-        image_npEng = preprocessorEng.transform_image(image)
-        image_npChi = preprocessorChi.transform_image(image)
-        image_npTam = preprocessorTan.transform_image(image)
+	elif script_name == "Tamil":
+		image_npTam = preprocessorTan.transform_image(converted_image)
+		converted_imageTam = Image.fromarray(image_npTam)
 
-        converted_imageEng = Image.fromarray(image_npEng)
-        converted_imageChi = Image.fromarray(image_npChi)
-        converted_imageTam = Image.fromarray(image_npTam)
+		text = pytesseract.image_to_string(converted_imageTam, lang='tam', config="--psm 6")
+		lang = "Tam"
 
-        text1 = pytesseract.image_to_string(converted_imageChi, lang='chi_sim')
-        text2 = pytesseract.image_to_string(converted_imageTam, lang='tam')
-        text3 = pytesseract.image_to_string(converted_image, lang='eng')
-        if len(text1) < len(text2)/1.5:
-            if len(text3) < 3*len(text2):
-                text = text2
-                lang = "Tam"
-            else:
-                text = text3
-                lang = "eng"
-        else:
-            if len(text3) < len(text1):
-                text = text1
-                lang = "chi_sim"
-            else:
-                text = text3
-                lang = "eng"
-    else:
-        image_npEng = preprocessorEng.transform_image(image)
-        converted_imageEng = Image.fromarray(image_npEng)
+	elif script_name == "Arabic":
+		image_npEng = preprocessorEng.transform_image(converted_image)
+		image_npChi = preprocessorChi.transform_image(converted_image)
+		image_npTam = preprocessorTan.transform_image(converted_image)
 
-        text = pytesseract.image_to_string(converted_imageEng, lang='eng')
-        lang = "eng"
-    
-    return text, lang
+		converted_imageEng = Image.fromarray(image_npEng)
+		converted_imageChi = Image.fromarray(image_npChi)
+		converted_imageTam = Image.fromarray(image_npTam)
+		
+		results_eng = trnsImg.detect_language(converted_imageEng)
+		results_chi = trnsImg.detect_language(converted_imageChi)
+		results_tam = trnsImg.detect_language(converted_imageTam)
+
+		if results_tam[1] > results_chi[1] and results_tam[1] > results_eng[1]:
+			if results_tam[0] != "Arabic":
+				text = pytesseract.image_to_string(converted_imageTam, lang='tam', config="--psm 6")
+				lang = "tam"
+		elif results_chi[1] > results_eng[1]:
+			if results_chi[0] != "Arabic":
+				text = pytesseract.image_to_string(converted_imageChi, lang='chi_sim', config="--psm 6")
+				lang = "chi"
+		elif results_eng[0] != "Arabic":
+			text = pytesseract.image_to_string(converted_imageEng, lang='eng', config="--psm 6")
+			lang = "eng"
+
+	elif script_name == "null":
+		pass
+
+	else:
+		image_npEng = preprocessorEng.transform_image(converted_image)
+		converted_imageEng = Image.fromarray(image_npEng)
+		
+		text = pytesseract.image_to_string(converted_imageEng, lang='eng', config="--psm 6")
+		lang = "eng"
+
+	return text, lang

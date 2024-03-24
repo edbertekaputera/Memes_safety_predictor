@@ -1,6 +1,6 @@
-from .model import HateClassifier
-from .datasets import MemesLoader
+from . import model
+from . import preprocessing
 
 __all__ = [
-	"HateClassifier", "MemesLoader"
+	"model", "preprocessing"
 ]
