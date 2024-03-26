@@ -32,14 +32,14 @@ RUN apt-get update && \
 # RUN apt install -y libcudnn8 ibcudnn8-dev libcudnn8-samples
 
 # Install necessary libraries
-RUN apt-get install -y python3-pip tesseract-ocr libgtk-3-dev \
+RUN apt-get install -y python3 python3-pip tesseract-ocr libgtk-3-dev \
 	build-essential zlib1g-dev libncurses5-dev libgdbm-dev libnss3-dev libssl-dev libreadline-dev libffi-dev \
     libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
     libxvidcore-dev libx264-dev libjpeg-dev libpng-dev libtiff-dev \
     gfortran openexr libatlas-base-dev \
     libtbbmalloc2 libtbb-dev libopenexr-dev \
     libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev libgl1-mesa-dev libglib2.0-0 \
-	unzip git
+	unzip git git-lfs
 
 # # Cleanup unnecessary files
 # RUN apt-get clean && \

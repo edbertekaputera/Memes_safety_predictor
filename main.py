@@ -5,6 +5,10 @@ import sys
 from src.model import HateClassifier
 from src.preprocessing import MemesLoader
 
+# Turn off warnings
+import warnings 
+warnings.warn = lambda *args,**kwargs: None
+
 # Classification function
 def classify_meme(image_path, model:HateClassifier, loader:MemesLoader, threshold=0.5):
 	input = loader(image_path)
@@ -15,12 +19,14 @@ def classify_meme(image_path, model:HateClassifier, loader:MemesLoader, threshol
 
 # Main
 def main():
-	device = torch.device("cuda" if torch.cuda.is_available() 
-					   else "mps" if torch.backends.mps.is_available() 
-					   else "cpu")
+	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	
 	# Initialize predictors in ensemble
-	meme_loader = MemesLoader("./resources/pretrained_weights/clip/ViT-L-14.pt", device=device)
+	meme_loader = MemesLoader(clip_weights="./resources/pretrained_weights/clip/ViT-L-14.pt", 
+							fasttext_weights="./resources/pretrained_weights/fasttext/lid.176.bin",
+							translation_weights="./resources/pretrained_weights/facebook/m2m100_1.2B",
+							device=device)
+
 	model = HateClassifier.load_from_checkpoint("./resources/pretrained_weights/hmc_text-inv-comb_best.ckpt", 
 											clip_weights_path="./resources/pretrained_weights/clip/ViT-L-14.pt",
 											text_inver_phi_weights_path="./resources/pretrained_weights/phi/phi_imagenet_45.pt",

@@ -8,3 +8,7 @@ ftfy
 regex
 tqdm
 clip @ git+https://github.com/openai/CLIP.git
+pytesseract
+transformers
+fasttext
+sentencepiece
