@@ -54,10 +54,15 @@ class TranslatorEngine:
 			word = word.strip()
 			if word == "":
 				pass
-			if subs_length + len(word) > 50 or (subs_length > 0 and subs[-1][-1] == "."):
+			if subs_length + len(word) > 50:
 				partitions.append(" ".join(subs))
 				subs = []
 				subs_length = 0
+			elif (subs_length > 0 ):
+				if len(subs[-1]) > 0 and subs[-1][-1] == ".":
+					partitions.append(" ".join(subs))
+					subs = []
+					subs_length = 0
 			subs_length += len(word)
 			subs.append(word)
 		if subs_length > 0:
