@@ -5,8 +5,6 @@ import re
 from .text_extractor import TextExtractor
 from .translation import TranslatorEngine
 
-os.environ['CUDA_LAUNCH_BLOCKING'] = "1"
-
 class MemesLoader:
 	def __init__(self, clip_weights:str, 
 			  fasttext_weights:str, 
@@ -27,6 +25,8 @@ class MemesLoader:
 
 		# Extract image and script
 		text, lang = self.__text_extractor(image)
+		if text == "":
+			text = "null"
 
 		if lang == "latin_alpha":
 			text = self.__translate(text)
@@ -35,7 +35,7 @@ class MemesLoader:
 
 		# Filtering
 		filtered_text = re.sub("[^\w\d\s,.;!?'\"“]", "", text)
-		if len(filtered_text)/len(text) < 0.9:
+		if len(text) == 0 or len(filtered_text)/len(text) < 0.9:
 			filtered_text = "null"
 		
 		# Tokenizing enhanced text

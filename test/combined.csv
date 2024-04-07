@@ -1,0 +1,106 @@
+image_path,labels,label
+./test/MemesDataset/Racial/101308762_10158227146835675_5555646042550042624_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/214363420_2909789092630565_5158877035230996416_n.png,"[1, 1, 0, 0, 1]",1
+./test/MemesDataset/Racial/231627852_1036211627184180_3611281870199192696_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/413971576_1076538993481827_1850587806190910326_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/433271586_738815741710185_6399238658926898754_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/69929347_2444969645613380_459858907119470688_n.png,"[0, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/85187086_228635518177313_4605232671704784503_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4123.jpg,"[1, 0, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4208.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4262.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4416.jpg,"[0, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4433.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4459.jpg,"[0, 0, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4580.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4634.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4733.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4799.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4831.jpg,"[1, 0, 1, 0, 1]",1
+./test/MemesDataset/Racial/img_4860.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_4964.jpg,"[1, 1, 1, 0, 0]",1
+./test/MemesDataset/Racial/img_4988.jpg,"[1, 1, 1, 0, 0]",1
+./test/MemesDataset/Racial/img_5037.jpg,"[1, 1, 0, 0, 1]",1
+./test/MemesDataset/Racial/img_5075.jpg,"[1, 1, 1, 1, 0]",1
+./test/MemesDataset/Racial/img_5168.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_5254.jpg,"[0, 0, 0, 1, 0]",0
+./test/MemesDataset/Racial/img_5626.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_5647.jpg,"[1, 1, 1, 1, 0]",1
+./test/MemesDataset/Racial/img_5690.jpg,"[0, 0, 1, 1, 0]",0
+./test/MemesDataset/Racial/img_5696.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_5851.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/img_6014.jpg,"[0, 0, 0, 1, 0]",0
+./test/MemesDataset/Racial/img_6486.jpg,"[1, 1, 1, 1, 0]",1
+./test/MemesDataset/Racial/img_6553.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/lo3jg4ratxi51.webp,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/racis3.jpeg,"[1, 0, 0, 0, 1]",0
+./test/MemesDataset/Racial/racism.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/racism1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/racist2.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/racisttrainladysg2.jpg,"[1, 1, 1, 1, 0]",1
+./test/MemesDataset/Racial/racist_1.png,"[1, 1, 0, 0, 0]",0
+./test/MemesDataset/Racial/racist_2.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/racist_3.png,"[0, 1, 1, 1, 0]",1
+./test/MemesDataset/Racial/racist_4.png,"[0, 0, 0, 0, 1]",0
+./test/MemesDataset/Racial/racist_5.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/Screenshot 2024-03-21 132145.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/tweet_1768476755504120090_20240323_232715_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/tweet_1769139561534292024_20240324_001008_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Racial/tweet_1770733867810308251_20240324_154451_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/153645855_295277198638702_4792968307002196859_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/154724569_131054758905718_3287736093581466168_n.png,"[1, 1, 1, 1, 0]",1
+./test/MemesDataset/Religion/272669290_658646578918790_9175197798510608231_n.png,"[1, 1, 1, 0, 1]",1
+./test/MemesDataset/Religion/NUS-atheist-society.webp,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/rel1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/rel2.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/rel3.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/religion_1.png,"[0, 0, 0, 1, 1]",0
+./test/MemesDataset/Religion/religion_2.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/religion_3.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/religion_4.png,"[1, 1, 0, 1, 1]",1
+./test/MemesDataset/Religion/religion_5.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/religion_6.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/religion_7.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Religion/religion_8.png,"[1, 1, 1, 1, 0]",1
+./test/MemesDataset/Religion/THK7ULSyXxpV-DMR_UXQHh8InbzUntSn0WzarYxkWbo.png,"[1, 0, 0, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/upr_heckinunicorn_sq.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/download.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/ds3upgm2c3f61.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/tweet_1771384951814152547_20240323_231645_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/sexual2.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/5e7e64fdd1218268a223f7faa8894c0c.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/4gmn0ty2p5w71.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/orien1.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/tweet_1771305215616332183_20240323_225758_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/img_6123.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/y12k26jpe4671.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/gay_1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Sexual Orientation/gay_2.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/images (1).jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/tweet_1769644086292811987_20240324_152435_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/mm2s8ytnjsl71.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/social_1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/divide2.jpg,"[0, 0, 0, 0, 0]",0
+./test/MemesDataset/Socio Economic/social_2.png,"[0, 0, 0, 0, 0]",0
+./test/MemesDataset/Socio Economic/divide1.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/costofliving1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/social_3.png,"[0, 0, 0, 0, 0]",0
+./test/MemesDataset/Socio Economic/social_4.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/socioeconomic1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/higher-ses-lower-ses-meme-mothership.png,"[0, 0, 0, 0, 0]",0
+./test/MemesDataset/Socio Economic/img_5265.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/428692601_18421507795004375_5495581536747018488_n.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/images.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Socio Economic/tweet_1771140685099610227_20240323_231317_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/82992392_987836161630727_8262885017231818752_o.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/xenophobia_2.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/xeno4.jpg,"[0, 0, 0, 0, 0]",0
+./test/MemesDataset/Nationalistic/nationalistic.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/divide3.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/xenophobia_1.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/xeno3.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/xeno1.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/nationalistic2.jpg,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/tweet_1771773838554001787_20240324_152344_via_10015_io.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/217594647_568672820964131_4140415537996115698_n.png,"[1, 1, 1, 1, 1]",1
+./test/MemesDataset/Nationalistic/101543712_1654890811346644_3327272264692400128_o.png,"[1, 1, 1, 1, 1]",1

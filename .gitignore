@@ -164,3 +164,4 @@ cython_debug/
 
 *.ipynb
 resources/
+transfer_learned.tar.gz

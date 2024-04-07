@@ -15,8 +15,8 @@ class TranslatorEngine:
 		3. accelerator device (optional, default: cuda)
 		"""
 		self.__fast_text_model = fasttext.load_model(fasttext_weights_path)
-		self.__translation_model = M2M100ForConditionalGeneration.from_pretrained(translation_weights_path).to(device)
-		self.__translation_tokenizer = M2M100Tokenizer.from_pretrained(translation_weights_path)
+		self.__translation_model = M2M100ForConditionalGeneration.from_pretrained(translation_weights_path, local_files_only=True, cache_dir="/tmp").to(device)
+		self.__translation_tokenizer = M2M100Tokenizer.from_pretrained(translation_weights_path, local_files_only=True, cache_dir="/tmp")
 		self.device = device
 	
 	def identify_language(self, text:str) -> str:
@@ -38,7 +38,6 @@ class TranslatorEngine:
 			predicted_language = predictions[0][0].split("__label__")[1]
 			return predicted_language
 		except ValueError as e:
-			print(e)
 			return "NA"
 	
 	def separate_tamil(self, text:str):
@@ -53,7 +52,7 @@ class TranslatorEngine:
 		for word in splitted:
 			word = word.strip()
 			if word == "":
-				pass
+				continue
 			if subs_length + len(word) > 50 or (subs_length > 0 and subs[-1][-1] == "."):
 				partitions.append(" ".join(subs))
 				subs = []
@@ -107,8 +106,11 @@ class TranslatorEngine:
 
 		elif source_lang == "en":
 			return text
-		
-		else:
-			translated_text = self.translate(text, source_lang)
 
+		else:
+			try:
+				translated_text = self.translate(text, source_lang)
+			except:
+				return text
+			
 		return translated_text

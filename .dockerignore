@@ -17,6 +17,7 @@ README.md
 .DS_Store
 .gitignore
 */__pycache__/
+__pycache__
 
 # Ignore files
 *.png

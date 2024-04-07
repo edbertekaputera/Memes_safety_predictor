@@ -1,6 +1,0 @@
-# Ignore files
-*.png
-run.sh
-
-# Ignore the .venv directory
-.venv/

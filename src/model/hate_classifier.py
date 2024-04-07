@@ -19,10 +19,12 @@ class HateClassifier(pl.LightningModule):
 				clip_weights_path:str,
 				text_inver_phi_weights_path:str,
 				projection_embed_weights_path_1024: str,
-				projection_embed_weights_path_768: str):
+				projection_embed_weights_path_768: str,
+				lr=1e-5, weight_decay=1e-4):
 		
 		super().__init__()
-
+		self.lr = lr
+		self.weight_decay = weight_decay
 		self.acc = torchmetrics.Accuracy(task='binary')
 		self.auroc = torchmetrics.AUROC(task='binary')
 

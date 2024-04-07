@@ -10,19 +10,19 @@ To run the container,
 ```bash
 cat test/stdin.csv |
 docker run --init \
+		--platform=linux/x86_64 \
         --attach "stdin" \
         --attach "stdout" \
         --attach "stderr" \
         --cpus 8 \
-        --memory 6g \
-        --memory-swap 0 \
+        --memory 12g \
+        --memory-swap 4g \
         --ulimit nproc=1024 \
         --ulimit nofile=1024 \
-        --read-only \
         --mount type=bind,source="$(pwd)"/test/images,target=/images,readonly \
         --mount type=tmpfs,destination=/tmp,tmpfs-size=5368709120,tmpfs-mode=1777 \
         --interactive \
-        <CONTAINER_NAME> \
+        test \
 test/stdout.csv \
 test/stderr.csv
 ```
