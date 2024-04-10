@@ -2,17 +2,27 @@
 import cv2
 import torch
 import sys
-from src.model import HateClassifier
-from src.preprocessing import MemesLoader
+# from src.model import HateClassifier
+# from src.preprocessing import MemesLoader
+from src.model import HuggingFaceModel
+from src.preprocessing import HuggingFaceLoader
 
 # Turn off warnings
 import warnings 
 warnings.warn = lambda *args,**kwargs: None
 
 # Classification function
-def classify_meme(image_path, model:HateClassifier, loader:MemesLoader, threshold=0.5):
+# def classify_meme(image_path, model:HateClassifier, loader:MemesLoader, threshold=0.5):
+def classify_meme(image_path, model, loader, threshold=0.5):
 	input = loader(image_path)
 	logits = model(input)[0]
+	proba = torch.sigmoid(logits)
+	label = (proba >= threshold).int()
+	return proba, label
+
+def classify_meme_hf(image_path, model, loader, threshold=0.5):
+	input = loader(image_path)
+	logits = model(input)
 	proba = torch.sigmoid(logits)
 	label = (proba >= threshold).int()
 	return proba, label
@@ -22,18 +32,22 @@ def main():
 	device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 	
 	# Initialize predictors in ensemble
-	meme_loader = MemesLoader(clip_weights="./resources/pretrained_weights/clip/ViT-L-14.pt", 
-							fasttext_weights="./resources/pretrained_weights/fasttext/lid.176.bin",
-							translation_weights="./resources/pretrained_weights/facebook/m2m100_1.2B",
-							device=device)
+	# meme_loader = MemesLoader(clip_weights="./resources/pretrained_weights/clip/ViT-L-14.pt", 
+	# 						fasttext_weights="./resources/pretrained_weights/fasttext/lid.176.bin",
+	# 						translation_weights="./resources/pretrained_weights/facebook/m2m100_1.2B",
+	# 						device=device)
+	siglip_loader = HuggingFaceLoader(image_size=256, device=device)
 
-	model = HateClassifier.load_from_checkpoint("./resources/pretrained_weights/hmc_text-inv-comb_best.ckpt", 
-											clip_weights_path="./resources/pretrained_weights/clip/ViT-L-14.pt",
-											text_inver_phi_weights_path="./resources/pretrained_weights/phi/phi_imagenet_45.pt",
-											projection_embed_weights_path_1024="./resources/pretrained_weights/hmc/hmc_1024_projection_embeddings.pt",
-											projection_embed_weights_path_768="./resources/pretrained_weights/hmc/hmc_768_projection_embeddings.pt",
-											map_location=device)
-	model.eval()
+	# model = HateClassifier.load_from_checkpoint("./resources/pretrained_weights/hmc_text-inv-comb_best.ckpt", 
+	# 										clip_weights_path="./resources/pretrained_weights/clip/ViT-L-14.pt",
+	# 										text_inver_phi_weights_path="./resources/pretrained_weights/phi/phi_imagenet_45.pt",
+	# 										projection_embed_weights_path_1024="./resources/pretrained_weights/hmc/hmc_1024_projection_embeddings.pt",
+	# 										projection_embed_weights_path_768="./resources/pretrained_weights/hmc/hmc_768_projection_embeddings.pt",
+	# 										map_location=device)
+ 
+	siglip_model = HuggingFaceModel(repo_path="siglip-base-patch16-256-multilingual", device=device)
+
+	# model.eval()
 	
 	# Iteration loop to get new image filepath from sys.stdin:
 	for line in sys.stdin:
@@ -44,13 +58,17 @@ def main():
 			pass
 		try:
 			# Process the image
-			proba, label = classify_meme(image_path, 
-								model=model, 
-								loader=meme_loader,
-								threshold=0.5)
+			# proba, label = classify_meme(image_path, 
+			# 					model=model, 
+			# 					loader=meme_loader,
+			# 					threshold=0.5)
+			proba = classify_meme_hf(image_path,
+							model=siglip_model,
+							loader=siglip_loader,
+							threshold=0.5)
 
 			# Ensure each result for each image_path is a new line
-			sys.stdout.write(f"{proba:.4f}\t{label}\n")
+			# sys.stdout.write(f"{proba:.4f}\t{label}\n")
 
 		except Exception as e:
 			# Output to any raised/caught error/exceptions to stderr
